@@ -1,14 +1,14 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.List;
 
 @Entity
 @Data
-public class Acessorio {
+@Table(name = "acessorio")
+public class AcessorioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,6 @@ public class Acessorio {
 
     private String descricao;
 
-    @ManyToMany
-    private List<Carro> carro;
+    @OneToMany
+    private List<CarroEntity> carros;
 }

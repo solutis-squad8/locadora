@@ -1,6 +1,7 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +9,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Funcionario extends Pessoa {
+@Table(name = "funcionario")
+public class FuncionarioEntity extends PessoaEntity {
 
     @NotBlank
     private String matricula;

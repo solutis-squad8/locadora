@@ -1,7 +1,7 @@
 package br.com.solutis.locadora.repository;
 
-import br.com.solutis.locadora.model.Funcionario;
+import br.com.solutis.locadora.model.entity.FuncionarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FuncionarioRepository extends JpaRepository<Funcionario,Long> {
+public interface FuncionarioRepository extends JpaRepository<FuncionarioEntity,Long> {
 }

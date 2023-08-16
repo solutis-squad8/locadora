@@ -1,4 +1,4 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 
 import jakarta.persistence.*;
@@ -9,7 +9,8 @@ import java.util.List;
 
 @Data
 @Entity
-public class Fabricante {
+@Table(name = "fabricante")
+public class FabricanteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -18,5 +19,5 @@ public class Fabricante {
     private String nome;
 
     @OneToMany
-    private List<ModeloCarro> modelosCarros;
+    private List<ModeloCarroEntity> modelosCarros;
 }

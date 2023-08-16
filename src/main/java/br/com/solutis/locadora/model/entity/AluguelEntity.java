@@ -1,4 +1,4 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,8 @@ import java.util.Date;
 
 @Data
 @Entity
-public class Aluguel {
+@Table(name = "aluguel")
+public class AluguelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,14 +33,14 @@ public class Aluguel {
 
     @NotNull
     @OneToOne
-    private Motorista motorista;
+    private MotoristaEntity motorista;
 
     @NotNull
     @OneToOne
-    @JoinColumn(name = "apolice_seguro_id")
-    private ApoliceSeguro apoliceSeguro;
+    @JoinColumn(name = "apoliceSeguro_id")
+    private ApoliceSeguroEntity apolice;
 
     @OneToOne
-    private Carro carro;
+    private CarroEntity carro;
 
 }

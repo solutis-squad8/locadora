@@ -1,7 +1,8 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -12,12 +13,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Motorista extends Pessoa {
+@Table(name = "motorista")
+public class MotoristaEntity extends PessoaEntity {
 
     @NotBlank
     @Pattern(regexp = "\\d{10}")
     private String numeroCNH;
 
     @OneToMany
-    private List<Aluguel> alugueis;
+    private List<AluguelEntity> alugueis;
 }

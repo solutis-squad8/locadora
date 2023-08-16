@@ -1,4 +1,4 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 
 import jakarta.persistence.*;
@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-public class ApoliceSeguro {
+@Table(name = "apolice_seguro")
+public class ApoliceSeguroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -27,5 +28,5 @@ public class ApoliceSeguro {
     private Boolean protecaoRoubo;
 
     @OneToOne
-    private Aluguel aluguel;
+    private AluguelEntity aluguel;
 }
