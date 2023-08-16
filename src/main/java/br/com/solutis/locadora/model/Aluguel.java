@@ -25,4 +25,8 @@ public class Aluguel {
 
     private BigDecimal valorTotal;
 
+    @OneToOne
+    @JoinColumn(name = "apolice_seguro_id")
+    private ApoliceSeguro apoliceSeguro;
+
 }
