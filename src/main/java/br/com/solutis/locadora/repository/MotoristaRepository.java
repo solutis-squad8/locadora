@@ -1,4 +1,7 @@
 package br.com.solutis.locadora.repository;
 
-public interface MotoristaRepository {
+import br.com.solutis.locadora.model.entity.MotoristaEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MotoristaRepository extends JpaRepository<MotoristaEntity, Long> {
 }

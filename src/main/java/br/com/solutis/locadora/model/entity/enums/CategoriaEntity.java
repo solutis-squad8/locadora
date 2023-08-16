@@ -1,6 +1,6 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity.enums;
 
-public enum Categoria {
+public enum CategoriaEntity {
     HATCH_COMPACTO,
     HATCH_MEDIO,
     SEDAN_COMPACTO,

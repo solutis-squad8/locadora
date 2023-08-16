@@ -1,17 +1,20 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Entity
-public class Carro {
+@Table(name = "carro")
+public class CarroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -25,12 +28,12 @@ public class Carro {
     @NotNull
     private BigDecimal valorDiaria;
 
-    @ManyToMany
-    private List<Acessorio> acessorio;
+    @OneToMany
+    private List<AcessorioEntity> acessorios;
 
     @OneToMany
-    private List<Aluguel> alugueis;
+    private List<AluguelEntity> alugueis;
 
     @OneToOne
-    private ModeloCarro modeloCarro;
+    private ModeloCarroEntity modelo;
 }

@@ -1,5 +1,6 @@
-package br.com.solutis.locadora.model;
+package br.com.solutis.locadora.model.entity;
 
+import br.com.solutis.locadora.model.entity.enums.SexoEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +12,8 @@ import java.util.Date;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pessoa {
+@Table(name = "pessoa")
+public abstract class PessoaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +31,6 @@ public abstract class Pessoa {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Sexo sexo;
+    private SexoEntity sexo;
 
 }
