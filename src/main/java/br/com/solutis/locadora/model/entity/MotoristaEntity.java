@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,6 +17,7 @@ import java.util.List;
 @Table(name = "motorista")
 public class MotoristaEntity extends PessoaEntity {
 
+    @Column(unique=true)
     @NotBlank
     @Pattern(regexp = "\\d{10}")
     private String numeroCNH;

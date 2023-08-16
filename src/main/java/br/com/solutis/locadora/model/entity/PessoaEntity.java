@@ -25,6 +25,7 @@ public abstract class PessoaEntity {
     @NotNull
     private Date dataNascimento;
 
+    @Column(unique = true)
     @NotBlank
     @Pattern(regexp = "\\d{11}")
     private String cpf;
