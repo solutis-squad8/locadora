@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.service;
 
+import br.com.solutis.locadora.model.dto.MotoristaDto;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.repository.MotoristaRepository;
 import jakarta.transaction.Transactional;
@@ -20,13 +21,12 @@ public class MotoristaService extends BaseCrudService<MotoristaEntity> {
     private MotoristaRepository motoristaRepository;
 
     @Override
-    public MotoristaEntity salvar(MotoristaEntity motorista) {
+    public void salvar(MotoristaEntity motorista) {
         try{
-            MotoristaEntity salvo = this.motoristaRepository.save(motorista);
-            return salvo;
-        }catch(DataIntegrityViolationException e){
+            this.motoristaRepository.save(motorista);
+        }catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "CPF já existente", e);
+                    HttpStatus.INTERNAL_SERVER_ERROR, "CPF ou CNH já cadastrada", e);
         }
     }
 
