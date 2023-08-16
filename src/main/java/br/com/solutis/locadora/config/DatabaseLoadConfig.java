@@ -1,8 +1,10 @@
 package br.com.solutis.locadora.config;
 
 import br.com.solutis.locadora.model.entity.FuncionarioEntity;
+import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.model.entity.enums.SexoEntity;
 import br.com.solutis.locadora.repository.FuncionarioRepository;
+import br.com.solutis.locadora.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class DatabaseLoadConfig {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+    @Autowired
+    private MotoristaRepository motoristaRepository;
 
     @Bean
     public CommandLineRunner loadData() {
@@ -27,8 +31,13 @@ public class DatabaseLoadConfig {
             funcionario.setNome("Sono");
             funcionarioRepository.save(funcionario);
 
-            Optional<FuncionarioEntity> func = funcionarioRepository.findById(1L);
-            System.out.println(func);
+            MotoristaEntity motorista = new MotoristaEntity();
+            motorista.setNumeroCNH("1111111111");
+            motorista.setCpf("22222222222");
+            motorista.setSexo(SexoEntity.MASCULINO);
+            motorista.setDataNascimento(new Timestamp(System.currentTimeMillis()));
+            motorista.setNome("Batata");
+            motoristaRepository.save(motorista);
         };
     }
 }
