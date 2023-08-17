@@ -1,10 +1,11 @@
 package br.com.solutis.locadora.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BaseCrudService<T> {
     T obterPorId(Long id);
-    List<T> obterTodos();
+    Page<T> obterTodos(Pageable paginacao);
     void salvar(T entity);
     void excluirPorId(Long id);
 }

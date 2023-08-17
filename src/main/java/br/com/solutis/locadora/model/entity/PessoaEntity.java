@@ -22,6 +22,7 @@ public abstract class PessoaEntity {
     @NotBlank
     private String nome;
 
+    @Temporal(TemporalType.DATE)
     @NotNull
     private Date dataNascimento;
 

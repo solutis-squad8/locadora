@@ -1,17 +1,16 @@
 package br.com.solutis.locadora.service;
 
-import br.com.solutis.locadora.model.dto.MotoristaDto;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.repository.MotoristaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -37,8 +36,8 @@ public class MotoristaService implements BaseCrudService<MotoristaEntity> {
     }
 
     @Override
-    public List<MotoristaEntity> obterTodos() {
-        return this.motoristaRepository.findAll();
+    public Page<MotoristaEntity> obterTodos(Pageable paginacao) {
+        return this.motoristaRepository.findAll(paginacao);
     }
 
     @Override

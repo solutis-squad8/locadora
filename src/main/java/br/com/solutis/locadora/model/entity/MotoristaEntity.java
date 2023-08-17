@@ -8,11 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "motorista")
 public class MotoristaEntity extends PessoaEntity {
@@ -24,4 +26,5 @@ public class MotoristaEntity extends PessoaEntity {
 
     @OneToMany
     private List<AluguelEntity> alugueis;
+
 }
