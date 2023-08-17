@@ -5,6 +5,8 @@ import br.com.solutis.locadora.repository.CarroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,8 +37,8 @@ public class CarroService implements BaseCrudService<CarroEntity> {
     }
 
     @Override
-    public List<CarroEntity> obterTodos() {
-        return this.carroRepository.findAll();
+    public Page<CarroEntity> obterTodos(Pageable paginacao) {
+        return this.carroRepository.findAll(paginacao);
     }
 
     @Override
