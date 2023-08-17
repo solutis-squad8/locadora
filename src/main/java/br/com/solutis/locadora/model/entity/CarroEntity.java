@@ -19,6 +19,7 @@ public class CarroEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(unique = true)
     @NotBlank
     private String placa;
 
