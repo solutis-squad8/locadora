@@ -2,9 +2,9 @@ package br.com.solutis.locadora.service;
 
 import java.util.List;
 
-public abstract class BaseCrudService<T> {
-    public abstract T obterPorId(Long id);
-    public abstract List<T> obterTodos();
-    public abstract void salvar(T entity);
-    public abstract void excluirPorId(Long id);
+public interface BaseCrudService<T> {
+    T obterPorId(Long id);
+    List<T> obterTodos();
+    void salvar(T entity);
+    void excluirPorId(Long id);
 }

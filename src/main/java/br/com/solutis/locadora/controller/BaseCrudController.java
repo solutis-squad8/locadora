@@ -25,13 +25,13 @@ public abstract class BaseCrudController<T> {
     }
 
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody T entity){
+    public ResponseEntity<T> salvar(@RequestBody T entity){
         service.salvar(entity);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deletarPorId(@PathVariable Long id){
+    public ResponseEntity<T> deletarPorId(@PathVariable Long id){
         service.excluirPorId(id);
         return ResponseEntity.ok().build();
     }

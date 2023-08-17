@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class MotoristaService extends BaseCrudService<MotoristaEntity> {
+public class MotoristaService implements BaseCrudService<MotoristaEntity> {
     @Autowired
     private MotoristaRepository motoristaRepository;
 
