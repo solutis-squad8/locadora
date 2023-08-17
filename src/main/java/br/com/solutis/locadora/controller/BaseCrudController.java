@@ -2,6 +2,7 @@ package br.com.solutis.locadora.controller;
 
 
 import br.com.solutis.locadora.service.BaseCrudService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public abstract class BaseCrudController<T> {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<T> salvar(@RequestBody T entity){
         service.salvar(entity);
         return ResponseEntity.status(HttpStatus.CREATED).build();
