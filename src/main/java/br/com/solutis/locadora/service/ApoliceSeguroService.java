@@ -21,32 +21,29 @@ public class ApoliceSeguroService implements BaseCrudService<ApoliceSeguroEntity
     @Autowired
     private ApoliceSeguroRepository apoliceSeguroRepository;
 
-    @
+    @Override
     public void salvar(ApoliceSeguroEntity apolice) {
         try{
-            this.ApoliceSeguroRepository.save(apolice);
+            this.apoliceSeguroRepository.save(apolice);
         }catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Carro já registrado", e);
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Apólice de seguro já registrado", e);
         }
     }
 
     @Override
-    public ApoliceSeguroService obterPorId(Long id) {
-        return this.ApoliceSeguroRepository.findById(id)
+    public ApoliceSeguroEntity obterPorId(Long id) {
+        return this.apoliceSeguroRepository.findById(id)
                 .orElseThrow(NoSuchElementException::new);
     }
 
     @Override
     public Page<ApoliceSeguroEntity> obterTodos(Pageable paginacao) {
-        return this.ApoliceSeguroRepository.findAll(paginacao);
+        return this.apoliceSeguroRepository.findAll(paginacao);
     }
 
     @Override
     public void excluirPorId(Long id) {
-        this.ApoliceSeguroRepository.deleteById(id);
+        this.apoliceSeguroRepository.deleteById(id);
     }
-}
-
-
 }
