@@ -24,7 +24,7 @@ public class AcessorioService implements BaseCrudService<AcessorioEntity> {
             this.acessorioRepository.save(acessorio);
         }catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Carro já registrado", e);
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Acessórios já registrados", e);
         }
     }
 
