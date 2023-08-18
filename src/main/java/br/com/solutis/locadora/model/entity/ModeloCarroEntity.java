@@ -20,6 +20,7 @@ public class ModeloCarroEntity {
     @NotBlank
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
     @NotNull
     private CategoriaEntity categoria;
 

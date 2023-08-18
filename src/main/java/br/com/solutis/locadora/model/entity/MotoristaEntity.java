@@ -24,7 +24,7 @@ public class MotoristaEntity extends PessoaEntity {
     @Pattern(regexp = "\\d{10}")
     private String numeroCNH;
 
-    @OneToMany(mappedBy = "motorista")
+    @OneToMany
     private List<AluguelEntity> alugueis;
 
 }

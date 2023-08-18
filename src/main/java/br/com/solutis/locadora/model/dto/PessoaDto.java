@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
+
 public record PessoaDto(@NotNull String nome,
                         Date dataNascimento,
                         String cpf,

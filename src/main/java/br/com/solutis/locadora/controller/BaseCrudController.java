@@ -32,7 +32,7 @@ public abstract class BaseCrudController<T> {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<T> deletarPorId(@PathVariable Long id){
         service.excluirPorId(id);
         return ResponseEntity.ok().build();

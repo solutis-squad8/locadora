@@ -47,10 +47,10 @@ public class CarroEntity {
         acessorios.add(acessorioEntity);
     }
 
-    public void adicionarAcessorios(List<AcessorioEntity> acessorioEntities){
-        for (AcessorioEntity acessorioEntity: acessorioEntities) {
+    public void adicionarAcessorios(List<AcessorioEntity> acessorioEntityEntities){
+        for (AcessorioEntity acessorioEntity : acessorioEntityEntities) {
             acessorioEntity.getCarros().add(this);
         }
-        acessorios = acessorioEntities;
+        acessorios = acessorioEntityEntities;
     }
 }

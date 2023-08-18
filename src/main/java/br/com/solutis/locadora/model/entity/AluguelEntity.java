@@ -33,7 +33,7 @@ public class AluguelEntity {
     private BigDecimal valorTotal;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "motorista_id", referencedColumnName = "id")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private MotoristaEntity motorista;

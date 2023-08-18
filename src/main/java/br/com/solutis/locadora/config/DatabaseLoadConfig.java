@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.config;
 
+import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.FuncionarioEntity;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.model.entity.enums.SexoEntity;
@@ -11,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 @Configuration
 public class DatabaseLoadConfig {
@@ -38,6 +38,9 @@ public class DatabaseLoadConfig {
             motorista.setDataNascimento(new Timestamp(System.currentTimeMillis()));
             motorista.setNome("Batata");
             motoristaRepository.save(motorista);
+
+            CarroEntity carro = new CarroEntity();
+
         };
     }
 }
