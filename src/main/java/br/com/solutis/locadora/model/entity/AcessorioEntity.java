@@ -16,6 +16,6 @@ public class AcessorioEntity {
 
     private String descricao;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "acessorio")
     private List<CarroEntity> carros;
 }

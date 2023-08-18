@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -32,7 +33,9 @@ public class AluguelEntity {
     private BigDecimal valorTotal;
 
     @NotNull
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "motorista_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private MotoristaEntity motorista;
 
     @NotNull
@@ -40,7 +43,9 @@ public class AluguelEntity {
     @JoinColumn(name = "apoliceSeguro_id")
     private ApoliceSeguroEntity apolice;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carro_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private CarroEntity carro;
 
 }
