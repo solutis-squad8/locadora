@@ -16,6 +16,11 @@ public class AcessorioEntity {
 
     private String descricao;
 
-    @ManyToMany(mappedBy = "acessorios")
-    private List<CarroEntity> carros;
+    public AcessorioEntity(String descricao){
+        this.descricao = descricao;
+    }
+
+    public AcessorioEntity() {
+
+    }
 }

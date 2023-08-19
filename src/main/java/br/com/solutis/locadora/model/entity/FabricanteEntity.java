@@ -18,6 +18,11 @@ public class FabricanteEntity {
     @NotBlank
     private String nome;
 
-    @OneToMany
-    private List<ModeloCarroEntity> modelosCarros;
+    public FabricanteEntity(String nome){
+        this.nome = nome;
+    }
+
+    public FabricanteEntity(){
+
+    }
 }

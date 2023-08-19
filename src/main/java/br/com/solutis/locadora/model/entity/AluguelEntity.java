@@ -35,7 +35,6 @@ public class AluguelEntity {
     @NotNull
     @OneToOne
     @JoinColumn(name = "motorista_id", referencedColumnName = "id")
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private MotoristaEntity motorista;
 
     @NotNull

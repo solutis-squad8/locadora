@@ -24,9 +24,21 @@ public class ModeloCarroEntity {
     @NotNull
     private CategoriaEntity categoria;
 
-    @OneToMany
-    private List<CarroEntity> carros;
 
-    @OneToOne
+    @ManyToOne
+    @JoinTable(name = "fabricante_modelo", joinColumns = @JoinColumn(name = "modelo_id", foreignKey = @ForeignKey(name
+            = "modelo_id_fk")), inverseJoinColumns = @JoinColumn(name = "fabricante_id", foreignKey = @ForeignKey(name
+            = "fabricante_id_fk")))
     private FabricanteEntity fabricante;
+
+    public ModeloCarroEntity(Long id, String descricao, CategoriaEntity categoria, FabricanteEntity fabricante){
+        this.id = id;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.fabricante = fabricante;
+    }
+
+    public ModeloCarroEntity() {
+
+    }
 }

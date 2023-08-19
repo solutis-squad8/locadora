@@ -1,6 +1,7 @@
 package br.com.solutis.locadora.model.entity;
 
 
+import br.com.solutis.locadora.model.form.CarroInsertForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CarroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(unique = true)
     @NotBlank
@@ -30,7 +31,7 @@ public class CarroEntity {
     @NotNull
     private BigDecimal valorDiaria;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "equipado", joinColumns = @JoinColumn(name = "carro_id", foreignKey = @ForeignKey(name
             = "equipado_carro_id_fk")), inverseJoinColumns = @JoinColumn(name = "acessorio_id", foreignKey = @ForeignKey(name
             = "equipado_acessorio_id_fk")))
@@ -39,18 +40,38 @@ public class CarroEntity {
     @OneToMany(mappedBy = "carro", fetch = FetchType.LAZY)
     private List<AluguelEntity> alugueis = new ArrayList<>();
 
-    @OneToOne
+    @ManyToOne
     private ModeloCarroEntity modelo;
 
+    public CarroEntity(CarroInsertForm form, ModeloCarroEntity modelo){
+        this.placa = form.getPlaca();
+        this.cor = form.getCor();
+        this.valorDiaria = form.getValorDiaria();
+        this.modelo = modelo;
+    }
+
+    public CarroEntity(Long id, String placa, String cor, BigDecimal valorDiaria, List<AcessorioEntity> acessorios, List<AluguelEntity> alugueis, ModeloCarroEntity modelo) {
+        this.id = id;
+        this.placa = placa;
+        this.cor = cor;
+        this.valorDiaria = valorDiaria;
+        this.acessorios = acessorios;
+        this.alugueis = alugueis;
+        this.modelo = modelo;
+    }
+
+    public CarroEntity(Long id,  ModeloCarroEntity modelo, BigDecimal valorDiaria, List<AcessorioEntity> acessorios) {
+        this.id = id;
+        this.valorDiaria = valorDiaria;
+        this.acessorios = acessorios;
+        this.modelo = modelo;
+    }
+
     public void adicionarAcessorio(AcessorioEntity acessorioEntity){
-        acessorioEntity.getCarros().add(this);
         acessorios.add(acessorioEntity);
     }
 
     public void adicionarAcessorios(List<AcessorioEntity> acessorioEntityEntities){
-        for (AcessorioEntity acessorioEntity : acessorioEntityEntities) {
-            acessorioEntity.getCarros().add(this);
-        }
         acessorios = acessorioEntityEntities;
     }
 }

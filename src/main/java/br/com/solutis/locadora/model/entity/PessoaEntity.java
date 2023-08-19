@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -23,8 +24,7 @@ public abstract class PessoaEntity {
     private String nome;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+    private Timestamp dataNascimento;
 
     @Column(unique = true)
     @NotBlank

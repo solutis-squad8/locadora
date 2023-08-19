@@ -1,21 +1,24 @@
 package br.com.solutis.locadora.service;
 
+import br.com.solutis.locadora.mapper.MotoristaMapper;
+import br.com.solutis.locadora.model.dto.MotoristaDto;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.repository.MotoristaRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class MotoristaService implements BaseCrudService<MotoristaEntity> {
+public class MotoristaService implements BaseCrudService<MotoristaEntity, MotoristaDto, MotoristaEntity> {
     @Autowired
     private MotoristaRepository motoristaRepository;
 
@@ -36,8 +39,14 @@ public class MotoristaService implements BaseCrudService<MotoristaEntity> {
     }
 
     @Override
-    public Page<MotoristaEntity> obterTodos(Pageable paginacao) {
-        return this.motoristaRepository.findAll(paginacao);
+    public List<MotoristaDto> obterTodos() {
+        return MotoristaMapper.convertToMotoristaDtos(motoristaRepository.findAll());
+    }
+
+    public List<MotoristaDto> obterTodos(Long page, Long size) {
+        int defaultSize = size == null ? 10 : size.intValue();
+        return page == null ? MotoristaMapper.convertToMotoristaDtos(motoristaRepository.findAll())
+                : MotoristaMapper.convertToMotoristaDtos(motoristaRepository.findAllWithPage(PageRequest.of(page.intValue(), defaultSize)));
     }
 
     @Override

@@ -1,44 +1,37 @@
 package br.com.solutis.locadora.service;
 
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
+import br.com.solutis.locadora.model.form.AcessorioInsertForm;
 import br.com.solutis.locadora.repository.AcessorioRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 
 
 @Service
 @Transactional
-public class AcessorioService implements BaseCrudService<AcessorioEntity> {
+public class AcessorioService implements BaseCrudService<AcessorioEntity, AcessorioEntity, AcessorioInsertForm>{
     @Autowired
     private AcessorioRepository acessorioRepository;
 
-    public void salvar(AcessorioEntity acessorio) {
-        try{
-            this.acessorioRepository.save(acessorio);
-        }catch (DataIntegrityViolationException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Acessórios já registrados", e);
-        }
+    public void salvar(AcessorioInsertForm acessorioForm) {
+        AcessorioEntity acessorioEntity = new AcessorioEntity(acessorioForm.getDescricao());
+
+        this.acessorioRepository.save(acessorioEntity);
     }
 
-    @Override
     public AcessorioEntity obterPorId(Long id) {
         return null;
     }
 
     @Override
-    public Page<AcessorioEntity> obterTodos(Pageable paginacao) {
-        return this.acessorioRepository.findAll(paginacao);
+    public List<AcessorioEntity> obterTodos() {
+        return acessorioRepository.findAll();
     }
 
-    @Override
     public void excluirPorId(Long id) {
         this.acessorioRepository.deleteById(id);
     }

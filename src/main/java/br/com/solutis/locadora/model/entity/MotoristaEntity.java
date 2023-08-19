@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.model.entity;
 
+import br.com.solutis.locadora.model.entity.enums.SexoEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -26,5 +28,14 @@ public class MotoristaEntity extends PessoaEntity {
 
     @OneToMany
     private List<AluguelEntity> alugueis;
+
+    MotoristaEntity(Long id, String nome, Timestamp dataNascimento, String cpf, SexoEntity sexo, String numeroCNH){
+        this.setId(id);
+        this.setNome(nome);
+        this.setDataNascimento(dataNascimento);
+        this.setCpf(cpf);
+        this.setSexo(sexo);
+        this.numeroCNH = numeroCNH;
+    }
 
 }
