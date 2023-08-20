@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -32,8 +30,8 @@ public class DatabaseLoadConfig {
     private FabricanteRepository fabricanteRepository;
     @Autowired
     private ApoliceSeguroRepository apoliceSeguroRepository;
-    //@Autowired
-    //private AluguelRepository aluguelRepository;
+    @Autowired
+    private AluguelRepository aluguelRepository;
 
     @Bean
     public CommandLineRunner loadData() {
@@ -74,14 +72,21 @@ public class DatabaseLoadConfig {
             carro2.setModelo(modeloCarroEntities.get(0));
             carroRepository.save(carro2);
 
-            /*AluguelEntity aluguel = new AluguelEntity();
+            ApoliceSeguroEntity apolice = new ApoliceSeguroEntity(new BigDecimal(120), false, false, false);
+            apoliceSeguroRepository.save(apolice);
+
+            AluguelEntity aluguel = new AluguelEntity();
             aluguel.setCarro(carro);
-            aluguel.setDataDevolucao(new Date("2022-05-05"));
-            aluguel.setDataEntrega(new Date("2022-06-06"));
-            aluguel.setApolice(new ApoliceSeguroEntity());
+            aluguel.setDataDevolucao(new Date());
+            aluguel.setDataEntrega(new Date());
+            aluguel.setApolice(apolice);
             aluguel.setValorTotal(new BigDecimal(125));
             aluguel.setMotorista(motorista);
-            aluguelRepository.save(aluguel);*/
+            Calendar c = Calendar.getInstance();
+            aluguel.setDataPedido(c);
+            aluguelRepository.save(aluguel);
+            apolice.setAluguel(aluguel);
+            apoliceSeguroRepository.save(apolice);
         };
     }
 

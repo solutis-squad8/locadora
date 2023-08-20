@@ -38,6 +38,13 @@ public class ApoliceSeguroEntity {
         protecaoRoubo = form.getProtecaoRoubo();
     }
 
+    public ApoliceSeguroEntity(BigDecimal valorFranquia, Boolean protecaoTerceiro, Boolean protecaoCausasNaturais, Boolean protecaoRoubo) {
+        this.valorFranquia = valorFranquia;
+        this.protecaoTerceiro = protecaoTerceiro;
+        this.protecaoCausasNaturais = protecaoCausasNaturais;
+        this.protecaoRoubo = protecaoRoubo;
+    }
+
     public ApoliceSeguroEntity() {
 
     }
