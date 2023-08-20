@@ -1,8 +1,10 @@
 package br.com.solutis.locadora.service;
 
 
+import br.com.solutis.locadora.mapper.ApoliceSeguroMapper;
 import br.com.solutis.locadora.model.entity.ApoliceSeguroEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
+import br.com.solutis.locadora.model.form.ApoliceInsertForm;
 import br.com.solutis.locadora.repository.ApoliceSeguroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +15,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class ApoliceSeguroService implements BaseCrudService<ApoliceSeguroEntity>{
+public class ApoliceSeguroService implements BaseCrudService<ApoliceSeguroEntity, ApoliceSeguroEntity, ApoliceInsertForm>{
     @Autowired
     private ApoliceSeguroRepository apoliceSeguroRepository;
 
     @Override
-    public void salvar(ApoliceSeguroEntity apolice) {
+    public void salvar(ApoliceInsertForm apolice) {
         try{
-            this.apoliceSeguroRepository.save(apolice);
+            this.apoliceSeguroRepository.save(ApoliceSeguroMapper.convertToCarroEntity(apolice));
         }catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(
                     HttpStatus.INTERNAL_SERVER_ERROR, "Apólice de seguro já registrado", e);
@@ -38,8 +41,8 @@ public class ApoliceSeguroService implements BaseCrudService<ApoliceSeguroEntity
     }
 
     @Override
-    public Page<ApoliceSeguroEntity> obterTodos(Pageable paginacao) {
-        return this.apoliceSeguroRepository.findAll(paginacao);
+    public List<ApoliceSeguroEntity> obterTodos() {
+        return this.apoliceSeguroRepository.findAll();
     }
 
     @Override

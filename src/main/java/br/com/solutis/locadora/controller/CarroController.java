@@ -3,6 +3,7 @@ package br.com.solutis.locadora.controller;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.service.CarroService;
 import jakarta.annotation.Nullable;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ public class CarroController {
     private final CarroService carroService;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<?> addCarro(@RequestBody CarroInsertForm carroInsertForm){
         carroService.salvar(carroInsertForm);
         return ResponseEntity.status(HttpStatus.CREATED).build();

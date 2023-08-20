@@ -1,6 +1,7 @@
 package br.com.solutis.locadora.model.entity;
 
 
+import br.com.solutis.locadora.model.form.ApoliceInsertForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -29,4 +30,15 @@ public class ApoliceSeguroEntity {
 
     @OneToOne
     private AluguelEntity aluguel;
+
+    public ApoliceSeguroEntity(ApoliceInsertForm form) {
+        valorFranquia = form.getValorFranquia();
+        protecaoTerceiro = form.getProtecaoTerceiro();
+        protecaoCausasNaturais = form.getProtecaoCausasNaturais();
+        protecaoRoubo = form.getProtecaoRoubo();
+    }
+
+    public ApoliceSeguroEntity() {
+
+    }
 }

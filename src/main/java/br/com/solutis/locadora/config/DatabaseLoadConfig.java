@@ -30,6 +30,8 @@ public class DatabaseLoadConfig {
     private ModeloCarroRepository modeloCarroRepository;
     @Autowired
     private FabricanteRepository fabricanteRepository;
+    @Autowired
+    private ApoliceSeguroRepository apoliceSeguroRepository;
     //@Autowired
     //private AluguelRepository aluguelRepository;
 
