@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class Error implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

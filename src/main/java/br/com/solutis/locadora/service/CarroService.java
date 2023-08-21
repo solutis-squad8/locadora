@@ -5,6 +5,7 @@ import br.com.solutis.locadora.model.dto.CarroDto;
 import br.com.solutis.locadora.model.dto.CarroMinDto;
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
+import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
 import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.repository.CarroRepository;
@@ -58,6 +59,20 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
                 .orElseThrow(NoSuchElementException::new));
     }
 
+    public List<CarroMinDto> obterComFiltro(Long fabricanteId, CategoriaEntity categoria,
+                                            List<AcessorioEntity> acessorios, Long modeloId) {
+        if (fabricanteId != null) {
+            obterCarrosPorFabricante(fabricanteId);
+        }
+        if (categoria != null) {
+            obterCarrosPorCategoria(categoria);
+        }
+        if (modeloId != null) {
+            obterCarrosPorModeloId(modeloId);
+        }
+        return null;
+    }
+
     public List<CarroDto> obterCarrosPorFabricante(Long id) {
         return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Fabricante_Id(id));
     }
@@ -65,6 +80,12 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
     public List<CarroDto> obterCarrosPorCategoria(CategoriaEntity categoria) {
         return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Categoria(categoria));
     }
+
+    public List<CarroDto> obterCarrosPorModeloId(Long id) {
+        return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Id(id));
+    }
+
+
 
 //    public List<CarroDto> obterCarrosPorAcessorio(List<AcessorioEntity> acessorioEntities) {
 //        return carroRepository.findCarroEntitiesByAcessoriosContains(acessorioEntities);
