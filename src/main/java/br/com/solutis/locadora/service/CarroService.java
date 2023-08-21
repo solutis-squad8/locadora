@@ -2,12 +2,10 @@ package br.com.solutis.locadora.service;
 
 import br.com.solutis.locadora.mapper.CarroMapper;
 import br.com.solutis.locadora.model.dto.CarroDto;
-import br.com.solutis.locadora.model.entity.ApoliceSeguroEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.repository.CarroRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,9 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
     @Override
     public void salvar(CarroInsertForm form) {
         CarroEntity carro = new CarroEntity();
+        carro.setCor(form.getCor());
+        carro.setPlaca(form.getPlaca());
+        carro.setValorDiaria(form.getValorDiaria());
         carro.setModelo(carroRepository.findModeloById(form.getModeloId()).orElseThrow(NoSuchElementException::new));
         carro.setAcessorios(form.getAcessorios());
 
