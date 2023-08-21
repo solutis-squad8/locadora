@@ -7,7 +7,7 @@ import br.com.solutis.locadora.model.form.ApoliceInsertForm;
 
 public class ApoliceSeguroMapper {
 
-    public static ApoliceSeguroEntity convertToCarroEntity(ApoliceInsertForm apolice) {
+    public static ApoliceSeguroEntity convertToApoliceEntity(ApoliceInsertForm apolice) {
         return new ApoliceSeguroEntity(apolice);
     }
 }

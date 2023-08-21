@@ -1,9 +1,11 @@
 package br.com.solutis.locadora.model.entity;
 
+import br.com.solutis.locadora.model.form.AluguelInsertForm;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -11,6 +13,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "aluguel")
 public class AluguelEntity {
     @Id
@@ -33,7 +36,7 @@ public class AluguelEntity {
     private BigDecimal valorTotal;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "motorista_id", referencedColumnName = "id")
     private MotoristaEntity motorista;
 
@@ -47,4 +50,13 @@ public class AluguelEntity {
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private CarroEntity carro;
 
+    public AluguelEntity(AluguelInsertForm form, CarroEntity carro, MotoristaEntity motorista, ApoliceSeguroEntity apolice) {
+        dataPedido = form.getDataPedido();
+        dataDevolucao = form.getDataDevolucao();
+        dataEntrega = form.getDataEntrega();
+        valorTotal = form.getValorTotal();
+        this.motorista = motorista;
+        this.carro = carro;
+        this.apolice = apolice;
+    }
 }
