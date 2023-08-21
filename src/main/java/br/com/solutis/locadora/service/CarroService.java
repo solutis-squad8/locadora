@@ -26,6 +26,7 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         carro.setCor(form.getCor());
         carro.setPlaca(form.getPlaca());
         carro.setValorDiaria(form.getValorDiaria());
+        carro.setChassi(form.getChassi());
         carro.setModelo(carroRepository.findModeloById(form.getModeloId()).orElseThrow(NoSuchElementException::new));
         carro.setAcessorios(form.getAcessorios());
 

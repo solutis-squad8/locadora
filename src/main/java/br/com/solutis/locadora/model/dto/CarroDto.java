@@ -2,11 +2,7 @@ package br.com.solutis.locadora.model.dto;
 
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
-import br.com.solutis.locadora.model.entity.FabricanteEntity;
 import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
-import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -27,7 +27,7 @@ public class ApoliceSeguroService implements BaseCrudService<ApoliceSeguroEntity
     @Override
     public void salvar(ApoliceInsertForm apolice) {
         try{
-            this.apoliceSeguroRepository.save(ApoliceSeguroMapper.convertToCarroEntity(apolice));
+            this.apoliceSeguroRepository.save(ApoliceSeguroMapper.convertToApoliceEntity(apolice));
         }catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(
                     HttpStatus.INTERNAL_SERVER_ERROR, "Apólice de seguro já registrado", e);
