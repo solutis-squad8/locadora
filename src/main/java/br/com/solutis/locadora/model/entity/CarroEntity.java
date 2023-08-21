@@ -5,6 +5,7 @@ import br.com.solutis.locadora.model.form.CarroInsertForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,9 @@ public class CarroEntity {
     @NotNull
     private BigDecimal valorDiaria;
 
+    @NotNull
+    private String chassi;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "equipado", joinColumns = @JoinColumn(name = "carro_id", foreignKey = @ForeignKey(name
             = "equipado_carro_id_fk")), inverseJoinColumns = @JoinColumn(name = "acessorio_id", foreignKey = @ForeignKey(name
@@ -47,12 +51,14 @@ public class CarroEntity {
         this.placa = form.getPlaca();
         this.cor = form.getCor();
         this.valorDiaria = form.getValorDiaria();
+        this.chassi = form.getChassi();
         this.modelo = modelo;
     }
 
-    public CarroEntity(Long id, String placa, String cor, BigDecimal valorDiaria, List<AcessorioEntity> acessorios, List<AluguelEntity> alugueis, ModeloCarroEntity modelo) {
+    public CarroEntity(Long id, String placa, String chassi, String cor, BigDecimal valorDiaria, List<AcessorioEntity> acessorios, List<AluguelEntity> alugueis, ModeloCarroEntity modelo) {
         this.id = id;
         this.placa = placa;
+        this.chassi = chassi;
         this.cor = cor;
         this.valorDiaria = valorDiaria;
         this.acessorios = acessorios;

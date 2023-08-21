@@ -13,11 +13,17 @@ import java.util.List;
 
 public class CarroInsertForm {
 
+    private Long id;
+
+
     @NotBlank
     private String placa;
 
     @NotBlank
     private String cor;
+
+    @NotBlank
+    private String chassi;
 
     @NotNull
     private BigDecimal valorDiaria;
@@ -25,6 +31,22 @@ public class CarroInsertForm {
     private List<AcessorioEntity> acessorios = new ArrayList<>();
 
     private Long modeloId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getChassi() {
+        return chassi;
+    }
+
+    public void setChassi(String chassi) {
+        this.chassi = chassi;
+    }
 
     public String getPlaca() {
         return placa;

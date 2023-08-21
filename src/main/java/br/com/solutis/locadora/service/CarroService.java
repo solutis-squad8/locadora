@@ -3,6 +3,7 @@ package br.com.solutis.locadora.service;
 import br.com.solutis.locadora.mapper.CarroMapper;
 import br.com.solutis.locadora.model.dto.CarroDto;
 import br.com.solutis.locadora.model.entity.CarroEntity;
+import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.repository.CarroRepository;
 import jakarta.transaction.Transactional;
@@ -51,11 +52,38 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
                 convertToCarroDtos(carroRepository.findAllWithPage(PageRequest.of(page.intValue(), trueSize)));
     }
 
-    public CarroDto obterCarroPorId(Long id) {
+    public CarroDto obterCarroDtoPorId(Long id) {
         return CarroMapper.convertToCarroDto(carroRepository.findById(id)
                 .orElseThrow(NoSuchElementException::new));
     }
 
+    public List<CarroDto> obterCarrosPorFabricante(Long id) {
+        return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Fabricante_Id(id));
+    }
+
+    public List<CarroDto> obterCarrosPorCategoria(CategoriaEntity categoria) {
+        return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Categoria(categoria));
+    }
+
+//    public List<CarroDto> obterCarrosPorAcessorio(String acessorio) {
+//        return carroRepository.findCarroEntitiesByAcessoriosContains()
+//    }
+
+    public void atualizarCarro(Long id, CarroInsertForm carroInsertForm) {
+        CarroEntity carro = obterPorId(id);
+        if (carroInsertForm.getChassi() != null) {
+            carro.setChassi(carroInsertForm.getChassi());
+        }
+        if (carroInsertForm.getCor() != null) {
+            carro.setCor(carroInsertForm.getCor());
+        }
+        if (carroInsertForm.getValorDiaria() != null) {
+            carro.setValorDiaria(carroInsertForm.getValorDiaria());
+        }
+
+    }
+
+    @Override
     public void excluirPorId(Long id) {
         this.carroRepository.deleteById(id);
     }
