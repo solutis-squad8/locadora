@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  locadora-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: locadora
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: locadora
+    links:
+      - locadora-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://locadora-db:5432/locadora
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+
