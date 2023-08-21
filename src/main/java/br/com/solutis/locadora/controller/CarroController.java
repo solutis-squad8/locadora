@@ -36,22 +36,6 @@ public class CarroController {
         return ResponseEntity.ok().body(carroService.obterCarroDtoPorId(id));
     }
 
-//    @GetMapping("/fabricante/{id}")
-//    public ResponseEntity<?> obterCarroPorFabricante(@Nullable @Positive @PathVariable Long id) {
-//        return ResponseEntity.ok().body(carroService.obterCarrosPorFabricante(id));
-//    }
-//
-//    @GetMapping("/categoria")
-//    public ResponseEntity<?> obterCarroPorCategoria(@RequestParam CategoriaEntity categoria) {
-//        return ResponseEntity.ok().body(carroService.obterCarrosPorCategoria(categoria));
-//    }
-
-    //Implementar filtro de acessório
-//    @GetMapping("/acessorio/{acessorio}")
-//    public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
-//        return null;
-//    }
-
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<?> atualizarCarro(@PathVariable @Nullable @Positive Long id, @RequestBody CarroInsertForm carroInsertForm) {
