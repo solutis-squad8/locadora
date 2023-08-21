@@ -57,16 +57,18 @@ public class DatabaseLoadConfig {
             motoristaRepository.save(motorista);
 
             CarroEntity carro = new CarroEntity();
-            carro.setPlaca("ABCDEFG1");
+            carro.setPlaca("ABC1234");
             carro.setCor("Azul");
+            carro.setChassi("534764");
             carro.setValorDiaria(new BigDecimal(123.0));
             carro.adicionarAcessorios(acessorioEntities);
             carro.setModelo(modeloCarroEntities.get(0));
             carroRepository.save(carro);
 
             CarroEntity carro2 = new CarroEntity();
-            carro2.setPlaca("ABFG1");
+            carro2.setPlaca("DEF5678");
             carro2.setCor("Vermelho");
+            carro2.setChassi("5345432");
             carro2.setValorDiaria(new BigDecimal(100.0));
             carro2.adicionarAcessorios(acessorioEntities);
             carro2.setModelo(modeloCarroEntities.get(0));

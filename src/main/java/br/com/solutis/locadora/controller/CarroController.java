@@ -1,5 +1,7 @@
 package br.com.solutis.locadora.controller;
 
+import br.com.solutis.locadora.model.entity.CarroEntity;
+import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.service.CarroService;
 import jakarta.annotation.Nullable;
@@ -32,6 +34,30 @@ public class CarroController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obterCarroPorId(@Nullable @Positive @PathVariable Long id ){
-        return ResponseEntity.ok().body(carroService.obterCarroPorId(id));
+        return ResponseEntity.ok().body(carroService.obterCarroDtoPorId(id));
     }
+
+    @GetMapping("/fabricante/{id}")
+    public ResponseEntity<?> obterCarroPorFabricante(@Nullable @Positive @PathVariable Long id) {
+        return ResponseEntity.ok().body(carroService.obterCarrosPorFabricante(id));
+    }
+
+    @GetMapping("categoria/{categoria}")
+    public ResponseEntity<?> obterCarroPorCategoria(@PathVariable CategoriaEntity categoria) {
+        return ResponseEntity.ok().body(carroService.obterCarrosPorCategoria(categoria));
+    }
+
+    @GetMapping("acessorio/{acessorio}")
+    public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
+        return null;
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> atualizarCarro(@PathVariable @Nullable @Positive Long id, @RequestBody CarroInsertForm carroInsertForm) {
+        carroService.atualizarCarro(id, carroInsertForm);
+        return ResponseEntity.ok().build();
+   }
+
+
 }
