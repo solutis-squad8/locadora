@@ -1,6 +1,5 @@
 package br.com.solutis.locadora.controller;
 
-import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.service.CarroService;
 import jakarta.annotation.Nullable;
@@ -48,10 +47,10 @@ public class CarroController {
 //    }
 
     //Implementar filtro de acessório
-    @GetMapping("/acessorio/{acessorio}")
-    public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
-        return null;
-    }
+//    @GetMapping("/acessorio/{acessorio}")
+//    public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
+//        return null;
+//    }
 
     @PutMapping("/{id}")
     @Transactional
@@ -59,6 +58,5 @@ public class CarroController {
         carroService.atualizarCarro(id, carroInsertForm);
         return ResponseEntity.ok().build();
    }
-
 
 }

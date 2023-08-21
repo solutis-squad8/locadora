@@ -19,11 +19,10 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class CarroService implements BaseCrudService<CarroEntity, CarroDto , CarroInsertForm>{
+public class CarroService {
     @Autowired
     private CarroRepository carroRepository;
 
-    @Override
     public void salvar(CarroInsertForm form) {
         CarroEntity carro = new CarroEntity();
         carro.setCor(form.getCor());
@@ -34,17 +33,6 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         carro.setAcessorios(form.getAcessorios());
 
         this.carroRepository.save(carro);
-    }
-
-    @Override
-    public CarroEntity obterPorId(Long id) {
-        return carroRepository.findById(id)
-                .orElseThrow(NoSuchElementException::new);
-    }
-
-    @Override
-    public List<CarroDto> obterTodos() {
-        return CarroMapper.convertToCarroDtos(carroRepository.findAll());
     }
 
     public List<CarroMinDto> obterTodos(Long page, Long size) {
@@ -85,14 +73,8 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Id(id));
     }
 
-
-
-//    public List<CarroDto> obterCarrosPorAcessorio(List<AcessorioEntity> acessorioEntities) {
-//        return carroRepository.findCarroEntitiesByAcessoriosContains(acessorioEntities);
-//    }
-
     public void atualizarCarro(Long id, CarroInsertForm carroInsertForm) {
-        CarroEntity carro = obterPorId(id);
+        CarroEntity carro = carroRepository.findById(id).orElseThrow(NoSuchElementException::new);
         if (carroInsertForm.getChassi() != null) {
             carro.setChassi(carroInsertForm.getChassi());
         }
@@ -105,7 +87,6 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
 
     }
 
-    @Override
     public void excluirPorId(Long id) {
         this.carroRepository.deleteById(id);
     }
