@@ -1,13 +1,12 @@
 package br.com.solutis.locadora.repository;
 
 import br.com.solutis.locadora.model.dto.CarroDto;
-import br.com.solutis.locadora.model.dto.CarroMinDto;
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
 import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -31,5 +30,5 @@ public interface CarroRepository extends JpaRepository<CarroEntity, Long> {
 
     List<CarroEntity> findCarroEntitiesByModelo_Categoria(CategoriaEntity categoria);
 
-    List<CarroEntity> findCarroEntitiesByAcessoriosContains(AcessorioEntity acessorioEntity);
+    List<CarroEntity> findCarroEntitiesByAcessoriosContains(List<AcessorioEntity> acessorios);
 }

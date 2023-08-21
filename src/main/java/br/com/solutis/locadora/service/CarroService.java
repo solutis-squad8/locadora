@@ -65,8 +65,8 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Categoria(categoria));
     }
 
-//    public List<CarroDto> obterCarrosPorAcessorio(String acessorio) {
-//        return carroRepository.findCarroEntitiesByAcessoriosContains()
+//    public List<CarroDto> obterCarrosPorAcessorio(List<AcessorioEntity> acessorioEntities) {
+//        return carroRepository.findCarroEntitiesByAcessoriosContains(acessorioEntities)
 //    }
 
     public void atualizarCarro(Long id, CarroInsertForm carroInsertForm) {

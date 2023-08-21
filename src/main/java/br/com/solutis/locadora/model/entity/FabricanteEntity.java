@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Entity
 @Table(name = "fabricante")
@@ -21,6 +19,7 @@ public class FabricanteEntity {
     public FabricanteEntity(String nome){
         this.nome = nome;
     }
+
 
     public FabricanteEntity(){
 

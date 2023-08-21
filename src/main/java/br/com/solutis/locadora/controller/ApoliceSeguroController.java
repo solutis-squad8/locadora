@@ -1,6 +1,5 @@
 package br.com.solutis.locadora.controller;
 
-import br.com.solutis.locadora.model.entity.ApoliceSeguroEntity;
 import br.com.solutis.locadora.model.form.ApoliceInsertForm;
 import br.com.solutis.locadora.service.ApoliceSeguroService;
 import jakarta.annotation.Nullable;

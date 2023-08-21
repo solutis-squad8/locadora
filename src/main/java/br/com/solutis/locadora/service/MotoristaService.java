@@ -5,7 +5,6 @@ import br.com.solutis.locadora.model.dto.MotoristaDto;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 import br.com.solutis.locadora.repository.MotoristaRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;

@@ -1,9 +1,6 @@
 package br.com.solutis.locadora.model.form;
 
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
-import br.com.solutis.locadora.model.entity.AluguelEntity;
-import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -14,7 +11,6 @@ import java.util.List;
 public class CarroInsertForm {
 
     private Long id;
-
 
     @NotBlank
     private String placa;

@@ -1,7 +1,9 @@
 package br.com.solutis.locadora.service;
 
 import br.com.solutis.locadora.model.entity.FabricanteEntity;
+import br.com.solutis.locadora.model.form.FabricanteInsertForm;
 import br.com.solutis.locadora.repository.FabricanteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class FabricanteService implements BaseCrudService<FabricanteEntity, FabricanteEntity, FabricanteEntity> {
+@Transactional
+public class FabricanteService implements BaseCrudService<FabricanteEntity, FabricanteEntity, FabricanteInsertForm> {
 
     @Autowired
     private FabricanteRepository fabricanteRepository;
@@ -25,8 +28,10 @@ public class FabricanteService implements BaseCrudService<FabricanteEntity, Fabr
     }
 
     @Override
-    public void salvar(FabricanteEntity entity) {
-        this.fabricanteRepository.save(entity);
+    public void salvar(FabricanteInsertForm form) {
+        FabricanteEntity fabricante = new FabricanteEntity();
+        fabricante.setNome(form.getNome());
+        this.fabricanteRepository.save(fabricante);
     }
 
     @Override

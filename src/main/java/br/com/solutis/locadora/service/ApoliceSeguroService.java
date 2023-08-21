@@ -3,14 +3,11 @@ package br.com.solutis.locadora.service;
 
 import br.com.solutis.locadora.mapper.ApoliceSeguroMapper;
 import br.com.solutis.locadora.model.entity.ApoliceSeguroEntity;
-import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.form.ApoliceInsertForm;
 import br.com.solutis.locadora.repository.ApoliceSeguroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

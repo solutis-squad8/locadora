@@ -1,6 +1,5 @@
 package br.com.solutis.locadora.controller;
 
-import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.service.CarroService;
