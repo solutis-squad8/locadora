@@ -43,15 +43,12 @@ public class AluguelService implements BaseCrudService<AluguelEntity, AluguelDto
     public void salvar(AluguelInsertForm form) {
         MotoristaEntity motorista = motoristaRepository.findById(form.getMotoristaId()).orElseThrow(NoSuchElementException::new);
         CarroEntity carro = carroRepository.findById(form.getCarroId()).orElseThrow(NoSuchElementException::new);
-
         ApoliceSeguroEntity apolice = ApoliceSeguroMapper.convertToApoliceEntity(form.getApolice());
-        apoliceSeguroRepository.save(apolice);
-
         AluguelEntity aluguel = new AluguelEntity(form, carro, motorista, apolice);
 
-        aluguelRepository.save(aluguel);
         apolice.setAluguel(aluguel);
         apoliceSeguroRepository.save(apolice);
+        aluguelRepository.save(aluguel);
     }
 
     @Override

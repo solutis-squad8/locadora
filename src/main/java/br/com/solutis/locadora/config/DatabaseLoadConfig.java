@@ -93,8 +93,8 @@ public class DatabaseLoadConfig {
     }
 
     private List<AcessorioEntity> cargaInicialAcessorios() {
-        return Arrays.asList("Acessorio 1",
-                "Acessorio 2",
+        return Arrays.asList("Ar-condicionado",
+                "Sistema de navegação",
                 "Acessorio 3",
                 "Acessorio 4",
                 "Acessorio 5").stream().map(acessorio -> {
