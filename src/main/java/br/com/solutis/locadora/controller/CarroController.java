@@ -41,12 +41,13 @@ public class CarroController {
         return ResponseEntity.ok().body(carroService.obterCarrosPorFabricante(id));
     }
 
-    @GetMapping("categoria/{categoria}")
-    public ResponseEntity<?> obterCarroPorCategoria(@PathVariable CategoriaEntity categoria) {
+    @GetMapping("/categoria")
+    public ResponseEntity<?> obterCarroPorCategoria(@RequestParam CategoriaEntity categoria) {
         return ResponseEntity.ok().body(carroService.obterCarrosPorCategoria(categoria));
     }
 
-    @GetMapping("acessorio/{acessorio}")
+    //Implementar filtro de acessório
+    @GetMapping("/acessorio/{acessorio}")
     public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
         return null;
     }

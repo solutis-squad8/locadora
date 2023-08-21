@@ -2,6 +2,8 @@ package br.com.solutis.locadora.service;
 
 import br.com.solutis.locadora.mapper.CarroMapper;
 import br.com.solutis.locadora.model.dto.CarroDto;
+import br.com.solutis.locadora.model.dto.CarroMinDto;
+import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
@@ -32,7 +34,6 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         this.carroRepository.save(carro);
     }
 
-
     @Override
     public CarroEntity obterPorId(Long id) {
         return carroRepository.findById(id)
@@ -44,12 +45,11 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
         return CarroMapper.convertToCarroDtos(carroRepository.findAll());
     }
 
-
-    public List<CarroDto> obterTodos(Long page, Long size) {
+    public List<CarroMinDto> obterTodos(Long page, Long size) {
         int trueSize = size == null? 10 : size.intValue();
         System.out.println("page = "+ page+" - size = "+ size+" - trueSize = "+ trueSize);
-        return page==null?  CarroMapper.convertToCarroDtos(carroRepository.findAll()) : CarroMapper.
-                convertToCarroDtos(carroRepository.findAllWithPage(PageRequest.of(page.intValue(), trueSize)));
+        return page==null?  CarroMapper.convertToCarroMinDtos(carroRepository.findAll()) : CarroMapper.
+                convertToCarroMinDtos(carroRepository.findAllWithPage(PageRequest.of(page.intValue(), trueSize)));
     }
 
     public CarroDto obterCarroDtoPorId(Long id) {
@@ -66,7 +66,7 @@ public class CarroService implements BaseCrudService<CarroEntity, CarroDto , Car
     }
 
 //    public List<CarroDto> obterCarrosPorAcessorio(List<AcessorioEntity> acessorioEntities) {
-//        return carroRepository.findCarroEntitiesByAcessoriosContains(acessorioEntities)
+//        return carroRepository.findCarroEntitiesByAcessoriosContains(acessorioEntities);
 //    }
 
     public void atualizarCarro(Long id, CarroInsertForm carroInsertForm) {

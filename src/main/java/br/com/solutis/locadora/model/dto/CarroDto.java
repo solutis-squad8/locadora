@@ -2,18 +2,16 @@ package br.com.solutis.locadora.model.dto;
 
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
-import br.com.solutis.locadora.model.entity.FabricanteEntity;
 import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
-import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class CarroDto{
     private Long id;
-
+    private String placa;
+    private String chassi;
+    private String cor;
     private ModeloCarroEntity modelo;
 
     private BigDecimal valorDiaria;
@@ -25,9 +23,36 @@ public class CarroDto{
 
     public CarroDto(CarroEntity carroEntity) {
         this.id = carroEntity.getId();
+        this.cor = carroEntity.getCor();
+        this.chassi = carroEntity.getChassi();
+        this.placa = carroEntity.getPlaca();
         this.modelo = carroEntity.getModelo();
         this.valorDiaria = carroEntity.getValorDiaria();
         this.acessorioEntity = carroEntity.getAcessorios();
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public String getChassi() {
+        return chassi;
+    }
+
+    public void setChassi(String chassi) {
+        this.chassi = chassi;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
     }
 
     public Long getId() {
