@@ -79,7 +79,12 @@ public class CarrinhoService {
                 formEntrega.before(searchEntrega) && formDevolucao.after(searchDevolucao) ||
                 formEntrega.before(searchDevolucao) && formDevolucao.after(searchDevolucao) ||
                 formEntrega.after(searchEntrega) && formDevolucao.before(searchDevolucao) ||
-                formEntrega.equals(searchEntrega) && formDevolucao.equals(searchDevolucao)) {
+                formEntrega.equals(searchEntrega) && formDevolucao.equals(searchDevolucao) ||
+                formEntrega.after(searchEntrega) && formDevolucao.equals(searchDevolucao) ||
+                formEntrega.before(searchEntrega) && formDevolucao.equals(searchDevolucao) ||
+                formEntrega.equals(searchEntrega) && formDevolucao.before(searchDevolucao) ||
+                formEntrega.equals(searchEntrega) && formDevolucao.after(searchDevolucao)
+        ) {
             return false;
         }
         return true;
