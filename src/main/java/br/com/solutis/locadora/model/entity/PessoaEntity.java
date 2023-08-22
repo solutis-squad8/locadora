@@ -1,6 +1,7 @@
 package br.com.solutis.locadora.model.entity;
 
 import br.com.solutis.locadora.model.entity.enums.SexoEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,9 @@ public abstract class PessoaEntity {
     private String nome;
 
     @NotNull
-    private Timestamp dataNascimento;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
+    private Date dataNascimento;
 
     @Column(unique = true)
     @NotBlank

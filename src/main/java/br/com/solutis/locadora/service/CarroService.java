@@ -47,20 +47,6 @@ public class CarroService {
                 .orElseThrow(NoSuchElementException::new));
     }
 
-    public List<CarroMinDto> obterComFiltro(Long fabricanteId, CategoriaEntity categoria,
-                                            List<AcessorioEntity> acessorios, Long modeloId) {
-        if (fabricanteId != null) {
-            obterCarrosPorFabricante(fabricanteId);
-        }
-        if (categoria != null) {
-            obterCarrosPorCategoria(categoria);
-        }
-        if (modeloId != null) {
-            obterCarrosPorModeloId(modeloId);
-        }
-        return null;
-    }
-
     public List<CarroDto> obterCarrosPorFabricante(Long id) {
         return CarroMapper.convertToCarroDtos(carroRepository.findCarroEntitiesByModelo_Fabricante_Id(id));
     }

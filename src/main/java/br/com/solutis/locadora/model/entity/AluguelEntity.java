@@ -1,11 +1,13 @@
 package br.com.solutis.locadora.model.entity;
 
 import br.com.solutis.locadora.model.form.AluguelInsertForm;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -21,15 +23,19 @@ public class AluguelEntity {
     private Long id;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Calendar dataPedido;
 
     @NotNull
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Date dataEntrega;
 
     @NotNull
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Date dataDevolucao;
 
     @NotNull
@@ -51,7 +57,7 @@ public class AluguelEntity {
     private CarroEntity carro;
 
     public AluguelEntity(AluguelInsertForm form, CarroEntity carro, MotoristaEntity motorista, ApoliceSeguroEntity apolice) {
-        dataPedido = form.getDataPedido();
+        dataPedido = Calendar.getInstance();
         dataDevolucao = form.getDataDevolucao();
         dataEntrega = form.getDataEntrega();
         valorTotal = form.getValorTotal();
