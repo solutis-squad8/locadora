@@ -1,6 +1,7 @@
 package br.com.solutis.locadora.repository;
 
 import br.com.solutis.locadora.model.dto.CarroDto;
+import br.com.solutis.locadora.model.dto.CarroMinDto;
 import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.ModeloCarroEntity;
@@ -33,4 +34,11 @@ public interface CarroRepository extends JpaRepository<CarroEntity, Long> {
     List<CarroEntity> findCarroEntitiesByModelo_Id(Long id);
 
     List<CarroEntity> findCarroEntitiesByAcessoriosIn(List<AcessorioEntity> acessorios);
+
+    @Query("SELECT c " +
+            "FROM CarroEntity c " +
+            "WHERE :size = (select count (a) from AcessorioEntity a, CarroEntity c2 join c2.acessorios a2 where a = a2 and c = c2 and a.id in :acessorios)" +
+            "and (:categoria is null or c.modelo.categoria = :categoria) " +
+            "and (:fabricante is null or c.modelo.fabricante.nome = :fabricante)")
+    List<CarroMinDto> findCarrosFiltrados(List<Long> acessorios, Integer size, CategoriaEntity categoria, String fabricante);
 }

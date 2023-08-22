@@ -1,5 +1,6 @@
 package br.com.solutis.locadora.controller;
 
+import br.com.solutis.locadora.model.entity.enums.CategoriaEntity;
 import br.com.solutis.locadora.model.form.CarroInsertForm;
 import br.com.solutis.locadora.service.CarroService;
 import jakarta.annotation.Nullable;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,4 +46,8 @@ public class CarroController {
         return ResponseEntity.ok().build();
    }
 
+    @GetMapping("/filtro")
+    public ResponseEntity<?> obterCarrosComFiltro(@Nullable @RequestParam List<Long> acessoriosId, @Nullable @RequestParam CategoriaEntity categoria, @Nullable @RequestParam String fabricante) {
+        return ResponseEntity.ok().body(carroService.obterCarrosFiltrados(acessoriosId, categoria, fabricante));
+    }
 }
