@@ -29,29 +29,14 @@ public class CarroController {
     }
 
     @GetMapping
-    public ResponseEntity<?> obterCarros(@Nullable @Positive @RequestParam Long page,@Nullable @Positive @RequestParam Long size){
+    public ResponseEntity<?> obterCarros(@Nullable @Positive @RequestParam Long page,
+                                         @Nullable @Positive @RequestParam Long size){
         return ResponseEntity.ok().body(carroService.obterTodos(page, size));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obterCarroPorId(@Nullable @Positive @PathVariable Long id ){
         return ResponseEntity.ok().body(carroService.obterCarroDtoPorId(id));
-    }
-
-    @GetMapping("/fabricante/{id}")
-    public ResponseEntity<?> obterCarroPorFabricante(@Nullable @Positive @PathVariable Long id) {
-        return ResponseEntity.ok().body(carroService.obterCarrosPorFabricante(id));
-    }
-
-    @GetMapping("/categoria")
-    public ResponseEntity<?> obterCarroPorCategoria(@RequestParam CategoriaEntity categoria) {
-        return ResponseEntity.ok().body(carroService.obterCarrosPorCategoria(categoria));
-    }
-
-    //Implementar filtro de acessório
-    @GetMapping("/acessorio/{acessorio}")
-    public ResponseEntity<?> obterCarroPorAcessorio(@PathVariable String acessorio) {
-        return null;
     }
 
     @PutMapping("/{id}")

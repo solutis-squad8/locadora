@@ -31,6 +31,8 @@ public interface CarroRepository extends JpaRepository<CarroEntity, Long> {
 
     List<CarroEntity> findCarroEntitiesByModelo_Categoria(CategoriaEntity categoria);
 
+    List<CarroEntity> findCarroEntitiesByModelo_Id(Long id);
+
     List<CarroEntity> findCarroEntitiesByAcessoriosIn(List<AcessorioEntity> acessorios);
 
     @Query("SELECT c " +
