@@ -14,8 +14,6 @@ public class CarroMapper {
         return carros.stream().map(CarroDto::new).toList();
     }
 
-
-
     public static CarroDto convertToCarroDto(CarroEntity carro) {
         return new CarroDto(carro);
     }

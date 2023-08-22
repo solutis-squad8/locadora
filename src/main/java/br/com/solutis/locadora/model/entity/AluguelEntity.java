@@ -67,4 +67,15 @@ public class AluguelEntity {
         Long numeroDias = ChronoUnit.DAYS.between(dataEntrega.toInstant(), dataDevolucao.toInstant());
         valorTotal = new BigDecimal((carro.getValorDiaria().intValue() * numeroDias) + apolice.getValorFranquia().intValue());
     }
+
+    public AluguelEntity(CarrinhoEntity carrinho, MotoristaEntity motorista, CarroEntity carro, ApoliceSeguroEntity apolice) {
+        this.dataPedido = Calendar.getInstance();
+        this.dataDevolucao = carrinho.getDataDevolucao();
+        this.dataEntrega = carrinho.getDataEntrega();
+        this.apolice = apolice;
+        this.valorTotal = new BigDecimal((carro.getValorDiaria().intValue() *
+                ChronoUnit.DAYS.between(dataEntrega.toInstant(), dataDevolucao.toInstant()) + apolice.getValorFranquia().intValue()));
+        this.motorista = motorista;
+        this.carro = carro;
+    }
 }

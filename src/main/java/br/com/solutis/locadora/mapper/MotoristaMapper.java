@@ -1,9 +1,6 @@
 package br.com.solutis.locadora.mapper;
 
-import br.com.solutis.locadora.model.dto.CarroDto;
-import br.com.solutis.locadora.model.dto.CarroMinDto;
 import br.com.solutis.locadora.model.dto.MotoristaDto;
-import br.com.solutis.locadora.model.entity.CarroEntity;
 import br.com.solutis.locadora.model.entity.MotoristaEntity;
 
 import java.util.List;
