@@ -13,6 +13,8 @@ services:
 
 
   app:
+    depends_on:
+      - locadora-db
     build:
       context: .
       dockerfile: Dockerfile
