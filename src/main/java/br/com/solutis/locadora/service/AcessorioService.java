@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AcessorioService implements BaseCrudService<AcessorioEntity, AcessorioEntity, AcessorioInsertForm>{
+public class AcessorioService {
     @Autowired
     private AcessorioRepository acessorioRepository;
 
@@ -27,7 +27,6 @@ public class AcessorioService implements BaseCrudService<AcessorioEntity, Acesso
         return null;
     }
 
-    @Override
     public List<AcessorioEntity> obterTodos() {
         return acessorioRepository.findAll();
     }

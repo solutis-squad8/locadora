@@ -61,7 +61,8 @@ public class DatabaseLoadConfig {
             carro.setCor("Azul");
             carro.setChassi("534764");
             carro.setValorDiaria(new BigDecimal(123.0));
-            carro.adicionarAcessorios(acessorioEntities);
+            carro.adicionarAcessorio(acessorioEntities.get(1));
+            carro.adicionarAcessorio(acessorioEntities.get(2));
             carro.setModelo(modeloCarroEntities.get(0));
             carroRepository.save(carro);
 
@@ -70,8 +71,9 @@ public class DatabaseLoadConfig {
             carro2.setCor("Vermelho");
             carro2.setChassi("5345432");
             carro2.setValorDiaria(new BigDecimal(100.0));
-            carro2.adicionarAcessorios(acessorioEntities);
-            carro2.setModelo(modeloCarroEntities.get(0));
+            carro2.adicionarAcessorio(acessorioEntities.get(0));
+            carro2.adicionarAcessorio(acessorioEntities.get(3));
+            carro2.setModelo(modeloCarroEntities.get(1));
             carroRepository.save(carro2);
 
             ApoliceSeguroEntity apolice = new ApoliceSeguroEntity(new BigDecimal(120), false, false, false);
@@ -95,9 +97,9 @@ public class DatabaseLoadConfig {
     private List<AcessorioEntity> cargaInicialAcessorios() {
         return Arrays.asList("Ar-condicionado",
                 "Sistema de navegação",
-                "Acessorio 3",
-                "Acessorio 4",
-                "Acessorio 5").stream().map(acessorio -> {
+                "Difusor de escape",
+                "Camera de ré",
+                "Bancos de couro").stream().map(acessorio -> {
             AcessorioEntity acessorioEntity = new AcessorioEntity();
             acessorioEntity.setDescricao(acessorio);
             return acessorioRepository.save(acessorioEntity);
@@ -109,8 +111,14 @@ public class DatabaseLoadConfig {
                 "Utilitario").stream().map(modeloCarro -> {
             ModeloCarroEntity modeloCarroEntity = new ModeloCarroEntity();
             modeloCarroEntity.setDescricao(modeloCarro);
-            modeloCarroEntity.setCategoria(CategoriaEntity.ESPORTIVO);
-            modeloCarroEntity.setFabricante(fabricante.get(1));
+            if(modeloCarroEntity.getDescricao().equals("Picape")) {
+                modeloCarroEntity.setCategoria(CategoriaEntity.ESPORTIVO);
+                modeloCarroEntity.setFabricante(fabricante.get(1));
+            }
+            else {
+                modeloCarroEntity.setCategoria(CategoriaEntity.MINIVAN);
+                modeloCarroEntity.setFabricante(fabricante.get(0));
+            }
             return modeloCarroRepository.save(modeloCarroEntity);
         }).collect(Collectors.toList());
     }

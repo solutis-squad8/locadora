@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/carro")
@@ -59,5 +61,8 @@ public class CarroController {
         return ResponseEntity.ok().build();
    }
 
-
+    @GetMapping("/filtro")
+    public ResponseEntity<?> obterCarrosComFiltro(@Nullable @RequestParam List<Long> acessoriosId, @Nullable @RequestParam CategoriaEntity categoria, @Nullable @RequestParam String fabricante) {
+        return ResponseEntity.ok().body(carroService.obterCarrosFiltrados(acessoriosId, categoria, fabricante));
+    }
 }

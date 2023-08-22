@@ -21,8 +21,12 @@ public class AluguelController {
     @PostMapping
     @Transactional
     public ResponseEntity<?> addAluguel(@RequestBody AluguelInsertForm aluguelInsertForm){
-        aluguelService.salvar(aluguelInsertForm);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(aluguelService.salvar(aluguelInsertForm));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> obterTodosAlugueis(){
+        return ResponseEntity.ok().body(aluguelService.obterTodos());
     }
 
     @GetMapping("/motorista/{id}")
