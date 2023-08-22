@@ -25,11 +25,19 @@ public class CarrinhoService {
     public void addItemAoCarrinho(CarrinhoEntity carrinho) {
         if (carrinho.getDataEntrega().before(carrinho.getDataDevolucao())) {
             List<AluguelEntity> search = aluguelRepository.findAluguelEntitiesByCarro_Id(carrinho.getCarroId());
+            List<CarrinhoEntity> listaCarrinho = carrinhoRepository.findCarrinhoEntitiesByCarroId(carrinho.getCarroId());
             for (AluguelEntity aluguel :
                     search) {
                 if (!disponibilidadeCarroAluguel(carrinho.getDataEntrega(), carrinho.getDataDevolucao(),
                         aluguel.getDataEntrega(), aluguel.getDataDevolucao())) {
                     throw new DataIntegrityViolationException("Aluguel já existente para as datas selecionadas!");
+                }
+            }
+            for (CarrinhoEntity carrinho1 :
+                    listaCarrinho) {
+                if (!disponibilidadeCarroAluguel(carrinho.getDataEntrega(), carrinho.getDataDevolucao(),
+                        carrinho1.getDataEntrega(), carrinho1.getDataDevolucao())) {
+                    throw new DataIntegrityViolationException("Já existe um item no carrinho com essa configuração de aluguel!");
                 }
             }
             carrinhoRepository.save(carrinho);
@@ -52,7 +60,6 @@ public class CarrinhoService {
         MotoristaEntity motorista = motoristaRepository.findById(motoristaId).orElseThrow(NoSuchElementException::new);
         List<CarrinhoEntity> listaCarrinho = carrinhoRepository.findAllByMotoristaId(motorista.getId());
         CarroEntity carro;
-        List<AluguelEntity> aluguel = new ArrayList<>();
         AluguelEntity aluguelEntity;
         ApoliceSeguroEntity apoliceSeguroEntity;
         for (CarrinhoEntity carrinho : listaCarrinho) {
@@ -61,7 +68,6 @@ public class CarrinhoService {
                     carrinho.getProtecaoTerceiro(), carrinho.getProtecaoCausasNaturais(), carrinho.getProtecaoRoubo());
             apoliceSeguroRepository.save(apoliceSeguroEntity);
             aluguelEntity = new AluguelEntity(carrinho, motorista, carro, apoliceSeguroEntity);
-            aluguel.add(aluguelEntity);
             aluguelRepository.save(aluguelEntity);
             carrinhoRepository.delete(carrinho);
         }

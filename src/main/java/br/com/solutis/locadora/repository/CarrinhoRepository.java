@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CarrinhoRepository extends JpaRepository<CarrinhoEntity, Long> {
     List<CarrinhoEntity> findAllByMotoristaId(Long id);
+
+    List<CarrinhoEntity> findCarrinhoEntitiesByCarroId(Long carroId);
 }
