@@ -4,7 +4,6 @@ import br.com.solutis.locadora.model.entity.AcessorioEntity;
 import br.com.solutis.locadora.model.form.AcessorioInsertForm;
 import br.com.solutis.locadora.repository.AcessorioRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AcessorioService implements BaseCrudService<AcessorioEntity, AcessorioEntity, AcessorioInsertForm>{
+public class AcessorioService {
     @Autowired
     private AcessorioRepository acessorioRepository;
 
@@ -27,7 +26,6 @@ public class AcessorioService implements BaseCrudService<AcessorioEntity, Acesso
         return null;
     }
 
-    @Override
     public List<AcessorioEntity> obterTodos() {
         return acessorioRepository.findAll();
     }

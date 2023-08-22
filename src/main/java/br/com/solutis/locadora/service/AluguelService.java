@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class AluguelService implements BaseCrudService<AluguelEntity, AluguelDto, AluguelInsertForm> {
+public class AluguelService {
     @Autowired
     private AluguelRepository aluguelRepository;
     @Autowired
@@ -29,29 +29,33 @@ public class AluguelService implements BaseCrudService<AluguelEntity, AluguelDto
     @Autowired
     private ApoliceSeguroRepository apoliceSeguroRepository;
 
-    @Override
     public AluguelEntity obterPorId(Long id) {
         return aluguelRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-    @Override
     public List<AluguelDto> obterTodos() {
         return AluguelMapper.convertEntitiesToDto(aluguelRepository.findAll());
     }
 
-    @Override
-    public void salvar(AluguelInsertForm form) {
-        MotoristaEntity motorista = motoristaRepository.findById(form.getMotoristaId()).orElseThrow(NoSuchElementException::new);
-        CarroEntity carro = carroRepository.findById(form.getCarroId()).orElseThrow(NoSuchElementException::new);
-        ApoliceSeguroEntity apolice = ApoliceSeguroMapper.convertToApoliceEntity(form.getApolice());
-        AluguelEntity aluguel = new AluguelEntity(form, carro, motorista, apolice);
 
-        apolice.setAluguel(aluguel);
-        apoliceSeguroRepository.save(apolice);
-        aluguelRepository.save(aluguel);
+    public AluguelDto salvar(AluguelInsertForm form) {
+        List<AluguelEntity> search = aluguelRepository.findAluguelEntitiesByDataEntregaGreaterThanEqualAndDataDevolucaoLessThanEqualAndCarro_Id(form.getDataEntrega(), form.getDataDevolucao(), form.getCarroId());
+        if (search.isEmpty()) {
+            CarroEntity carro = carroRepository.findById(form.getCarroId()).orElseThrow(NoSuchElementException::new);
+            MotoristaEntity motorista = motoristaRepository.findById(form.getMotoristaId()).orElseThrow(NoSuchElementException::new);
+            ApoliceSeguroEntity apolice = ApoliceSeguroMapper.convertToApoliceEntity(form.getApolice());
+            AluguelEntity aluguel = new AluguelEntity(form, carro, motorista, apolice);
+
+            apolice.setAluguel(aluguel);
+            apoliceSeguroRepository.save(apolice);
+            aluguelRepository.save(aluguel);
+            AluguelDto criado = new AluguelDto(aluguel);
+            return criado;
+        }else {
+            return new AluguelDto();
+        }
     }
 
-    @Override
     public void excluirPorId(Long id) {
         aluguelRepository.deleteById(id);
     }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -54,9 +55,10 @@ public class AluguelEntity {
         dataPedido = form.getDataPedido();
         dataDevolucao = form.getDataDevolucao();
         dataEntrega = form.getDataEntrega();
-        valorTotal = form.getValorTotal();
         this.motorista = motorista;
         this.carro = carro;
         this.apolice = apolice;
+        Long numeroDias = ChronoUnit.DAYS.between(dataEntrega.toInstant(), dataDevolucao.toInstant());
+        valorTotal = new BigDecimal((carro.getValorDiaria().intValue() * numeroDias) + apolice.getValorFranquia().intValue());
     }
 }
